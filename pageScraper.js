@@ -1,4 +1,3 @@
-const { filterArray } = require("cheerio/lib/api/traversing");
 const scraperObject = {
   url: "https://www.reserve.unilodge.com.au/categoryInfo.html?category=273",
   async scraper(browser) {
@@ -16,44 +15,45 @@ const scraperObject = {
     console.log(urls.length, "urls");
     for (let i = 0; i < urls.length; i++) {
       const roomTitle = await urls[i].$eval("h2", (text) =>
-        text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
+      text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
+      const roomObj = {
+        roomTitle: roomTitle,
+        rate: rate,
+      };
+      data.push(roomObj);
       for (let j = 0; j < Obj.length; j++) {
         const roomPrice = await Obj[j].$eval(
           ".price",
           (number) => number.textContent
-        );
-        //rate object
+          );
+          //rate object
         let rateObj = {
           roomPrice: parseInt(roomPrice),
         };
         //push price inside rate array
         rate.push(rateObj);
       }
-      const roomObj = {
-        roomTitle: roomTitle,
-        rate: rate,
-      };
-      data.push(roomObj);
     }
-    let newData = [];
-    data.map((value) => {
-      const result = value.rate.filter(
-        (thing, index, self) =>
-          index ===
-          self.findIndex(
-            (t) => t.place === thing.place && t.roomPrice === thing.roomPrice
-          )
-      );
-      let pushobj = {
-        roomTitle: value.roomTitle,
-        Rate: result,
-      };
-      newData.push(pushobj);
-    });
-    newData.map((data) => {
-      console.log(data);
-    });
+    console.log(data);
+    // let newData = [];
+    // data.map((value) => {
+    //   const result = value.rate.filter(
+    //     (thing, index, self) =>
+    //       index ===
+    //       self.findIndex(
+    //         (t) => t.place === thing.place && t.roomPrice === thing.roomPrice
+    //       )
+    //   );
+    //   let pushobj = {
+    //     roomTitle: value.roomTitle,
+    //     Rate: result,
+    //   };
+    //   newData.push(pushobj);
+    // });
+    // newData.map((data) => {
+    //   console.log(data);
+    // });
   },
 };
 module.exports = scraperObject;
