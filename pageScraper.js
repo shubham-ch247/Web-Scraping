@@ -14,7 +14,7 @@ const scraperObject = {
       const roomTitle = await urls[i].$eval("h2", (text) =>
       text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
-      await page.waitForSelector(".");
+      await page.waitForSelector(".price");
       let Obj = await page.$$(".ul_stayPrice");
       const rate = [];
       for (let j = 0; j < Obj.length; j++) {
