@@ -1,6 +1,6 @@
-const browserObject = require("./browser");
-const scraperController = require("./pageController");
+const browser = require("./browser");
+const pageController = require("./pageController");
 //Start the browser and create a browser instance
-let browserInstance = browserObject.startBrowser();
+let browserInstance = browser.startBrowser();
 // Pass the browser instance to the scraper controller
-scraperController(browserInstance);
+pageController(browserInstance);
