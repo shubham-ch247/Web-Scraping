@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-
 async function startBrowser(){
 	let browser;
 	try {
@@ -14,7 +13,6 @@ async function startBrowser(){
 	}
 	return browser;
 }
-
 module.exports = {
 	startBrowser
 };
