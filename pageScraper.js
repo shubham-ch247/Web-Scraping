@@ -7,7 +7,6 @@ const scraperObject = {
     await page.goto(this.url);
     const data = [];
     // Wait for the required DOM to be rendered
-
     // Get the link to all the requier rooms
     let urls = await page.$$(".iq-room-card__content-extender");
     console.log(urls.length, "urls");
@@ -16,12 +15,14 @@ const scraperObject = {
       const roomTitle = await urls[i].$eval("h2", (text) =>
         text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
-      let obj = await urls[i].$$(".margin-reset iq-text-bold iq-room-card__availability");
+      let obj = await urls[i].$$(
+        ".margin-reset iq-text-bold iq-room-card__availability"
+      );
       const rate = [];
       //roomRate for loop
       for (let j = 0; j < obj.length; j++) {
         const roomPrice = await obj[j].$eval(
-          "",
+          ".iq-text-xl iq-text-red",
           (number) => number.textContent
         );
         //rate object
@@ -42,3 +43,6 @@ const scraperObject = {
   },
 };
 module.exports = scraperObject;
+
+
+    
