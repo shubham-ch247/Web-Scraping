@@ -6,7 +6,6 @@ const scraperObject = {
     // Navigate to the selected page
     await page.goto(this.url);
     const data = [];
-    // Wait for the required DOM to be rendered
     // Get the link to all the requier rooms
     let urls = await page.$$(".iq-room-card__content-extender");
     console.log(urls.length, "urls");
@@ -32,10 +31,7 @@ const scraperObject = {
         //push price inside rate array
         rate.push(rateObj);
       }
-      const roomObj = {
-        roomTitle: roomTitle,
-        roomRate: rate,
-      };
+      const roomObj = { roomTitle, rate };
       data.push(roomObj);
     }
     //const hotel = JSON.stringify(data)
@@ -43,6 +39,3 @@ const scraperObject = {
   },
 };
 module.exports = scraperObject;
-
-
-    
