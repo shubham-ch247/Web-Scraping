@@ -11,6 +11,7 @@ const scraperObject = {
     console.log(urls.length, "urls");
     //roomName for loop
     for (let i = 0; i < urls.length; i++) {
+      console.log(typeof(urls))
       const roomTitle = await urls[i].$eval("h2", (text) =>
         text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
@@ -20,6 +21,7 @@ const scraperObject = {
       const rate = [];
       //roomRate for loop
       for (let j = 0; j < obj.length; j++) {
+        console.log(typeof(obj))
         const roomPrice = await obj[j].$eval(
           ".iq-text-xl iq-text-red",
           (number) => number.textContent
