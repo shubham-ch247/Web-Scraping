@@ -7,29 +7,26 @@ const scraperObject = {
     await page.goto(this.url);
     const data = [];
     // Get the link to all the requier rooms
-    let urls = await page.$$(".iq-room-card__content-extender");
-    console.log(urls.length, "urls");
+    let rooms = await page.$$(".iq-room-card__content");
+    console.log(rooms.length, "rooms");
     //roomName for loop
-    for (let i = 0; i < urls.length; i++) {
-      console.log(typeof(urls))
-      const roomTitle = await urls[i].$eval("h2", (text) =>
+    for (let i = 0; i < rooms.length; i++) {
+      console.log(typeof rooms);
+      const roomTitle = await rooms[i].$eval("h2", (text) =>
         text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
-      let obj = await urls[i].$$(
-        ".margin-reset iq-text-bold iq-room-card__availability"
-      );
+      let price = await rooms[i].$$(".iq-room-card__content-extender");
       const rate = [];
       //roomRate for loop
-      for (let j = 0; j < obj.length; j++) {
-        console.log(typeof(obj))
-        const roomPrice = await obj[j].$eval(
-          ".iq-text-xl iq-text-red",
+      for (let j = 0; j < price.length; j++) {
+        console.log(typeof price);
+        const roomPrice = await price[j].$eval(
+          ".iq-text-xl",
           (number) => number.textContent
         );
         //rate object
-        const rateObj = {
-          roomPrice: parseInt(roomPrice),
-        };
+        const stayPrice =roomPrice.split("From ")[1] 
+        const rateObj = { stayPrice };
         //push price inside rate array
         rate.push(rateObj);
       }
