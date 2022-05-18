@@ -23,16 +23,11 @@ const scraperObject = {
           (number) => number.textContent
         );
         //rate object
-        const rateObj = {
-          roomPrice: parseInt(roomPrice),
-        };
+        const rateObj = { roomPrice: parseInt(roomPrice) };
         //push price inside rate array
         rate.push(rateObj);
       }
-      const roomObj = {
-        roomTitle: roomTitle,
-        roomRate: rate,
-      };
+      const roomObj = { roomTitle, rate };
       data.push(roomObj);
     }
     //const hotel = JSON.stringify(data)
