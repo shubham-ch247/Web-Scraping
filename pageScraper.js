@@ -30,7 +30,6 @@ const scraperObject = {
       const roomObj = { roomTitle, rate };
       data.push(roomObj);
     }
-    //const hotel = JSON.stringify(data)
     console.log(JSON.stringify(data));
   },
 };
