@@ -7,18 +7,17 @@ const scraperObject = {
     await page.goto(this.url);
     const data = [];
     // Wait for the required DOM to be rendered
-    let urls = await page.$$(".ul_room");
-    console.log(urls.length, "urls");
+    let rooms = await page.$$(".ul_room");
     //roomName for loop
-    for (let i = 0; i < urls.length; i++) {
-      const roomTitle = await urls[i].$eval("h2", (text) =>
+    for (let i = 0; i < rooms.length; i++) {
+      const roomTitle = await rooms[i].$eval("h2", (text) =>
         text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
-      let obj = await urls[i].$$(".ul_stayPrice");
+      let stayPrice = await rooms[i].$$(".ul_stayPrice");
       const rate = [];
       //roomRate for loop
-      for (let j = 0; j < obj.length; j++) {
-        const roomPrice = await obj[j].$eval(
+      for (let j = 0; j < stayPrice.length; j++) {
+        const roomPrice = await stayPrice[j].$eval(
           ".price",
           (number) => number.textContent
         );
