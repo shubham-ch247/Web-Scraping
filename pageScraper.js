@@ -11,7 +11,7 @@ const scraperObject = {
     console.log(rooms.length, "rooms");
     //roomName for loop
     for (let i = 0; i < rooms.length; i++) {
-      console.log(typeof rooms);
+      //console.log(typeof rooms);
       const roomTitle = await rooms[i].$eval("h2", (text) =>
         text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "").trim()
       );
@@ -19,7 +19,7 @@ const scraperObject = {
       const rate = [];
       //roomRate for loop
       for (let j = 0; j < price.length; j++) {
-        console.log(typeof price);
+        //console.log(typeof price);
         const roomPrice = await price[j].$eval(
           ".iq-text-xl",
           (number) => number.textContent
